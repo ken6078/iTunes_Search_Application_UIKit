@@ -29,9 +29,8 @@ class ArtistCell: UITableViewCell {
     func configure (_ artist: Artist) {
         contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: 80).isActive = true
         
-        
-        var image = UIImage(systemName: "music.mic.circle")
-        var songImageView = UIImageView(image: image)
+        let image = UIImage(systemName: "music.mic.circle")
+        let songImageView = UIImageView(image: image)
         contentView.addSubview(songImageView)
         songImageView.translatesAutoresizingMaskIntoConstraints = false
         songImageView.widthAnchor.constraint(equalToConstant: 60).isActive = true

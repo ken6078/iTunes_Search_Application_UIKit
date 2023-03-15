@@ -37,24 +37,16 @@ class SongCell: UITableViewCell {
         contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: 80).isActive = true
         
         let url = URL(string: song.artworkUrl100)!
-        var image = UIImage(systemName: "music.mic.circle")
-        var songImageView = UIImageView(image: image)
+        let image = UIImage(systemName: "music.mic.circle")
+        let songImageView = UIImageView(image: image)
+        songImageView.layer.masksToBounds = true
+        songImageView.layer.cornerRadius = 10
         getData(from: url) { data, response, error in
             if let error = error {
                 print("URLSession error: \(error)")
             } else {
                 DispatchQueue.main.async {
-                    image = UIImage(data: data!)
-                    songImageView = UIImageView(image: image)
-                    songImageView.contentMode = .scaleAspectFit
-                    songImageView.layer.cornerRadius = 10
-                    songImageView.layer.masksToBounds = true
-                    self.contentView.addSubview(songImageView)
-                    songImageView.translatesAutoresizingMaskIntoConstraints = false
-                    songImageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
-                    songImageView.heightAnchor.constraint(equalToConstant: 60).isActive = true
-                    songImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 10).isActive = true
-                    songImageView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
+                    songImageView.image = UIImage(data: data!)
                 }
             }
         }

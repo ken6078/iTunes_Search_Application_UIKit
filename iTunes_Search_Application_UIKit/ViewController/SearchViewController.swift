@@ -46,7 +46,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         view.backgroundColor = .systemBackground
         
         title = "搜尋"
-        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.prefersLargeTitles = false
         
         navigationItem.searchController = searchController
         searchController.searchResultsUpdater = self
@@ -108,6 +108,19 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
             let artist = artistListViewModel.artists[indexPath.row]
             cell.configure(artist)
             return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let navigationController = navigationController
+        switch(style) {
+        case .song:
+            let newViewController = SongViewController(song: songListViewModel.songs[indexPath.row])
+            navigationController!.pushViewController(newViewController, animated: true)
+        case .album:
+            break
+        case .artist:
+            break
         }
     }
     
@@ -206,7 +219,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
                 guard songListViewModel.state == .good else {return}
                 print("Load More For: \(searchText) @ Page: \(songListViewModel.page)")
                 searchView.tableFooterView = createSpinenerFooter()
-                songListViewModel.getSongList(for: searchText){
+                songListViewModel.getSongList(for: searchText) {
                     DispatchQueue.main.async {
                         self.searchView.tableFooterView = nil
                         self.searchView.reloadData()
@@ -216,7 +229,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
                 guard albumListViewModel.state == .good else {return}
                 print("Load More For: \(searchText) @ Page: \(albumListViewModel.page)")
                 searchView.tableFooterView = createSpinenerFooter()
-                albumListViewModel.getAlbumList(for: searchText){
+                albumListViewModel.getAlbumList(for: searchText) {
                     DispatchQueue.main.async {
                         self.searchView.tableFooterView = nil
                         self.searchView.reloadData()
@@ -226,7 +239,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
                 guard artistListViewModel.state == .good else {return}
                 print("Load More For: \(searchText) @ Page: \(artistListViewModel.page)")
                 searchView.tableFooterView = createSpinenerFooter()
-                artistListViewModel.getArtistList(for: searchText){
+                artistListViewModel.getArtistList(for: searchText) {
                     DispatchQueue.main.async {
                         self.searchView.tableFooterView = nil
                         self.searchView.reloadData()
