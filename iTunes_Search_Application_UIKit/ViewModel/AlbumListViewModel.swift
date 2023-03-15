@@ -18,9 +18,8 @@ class AlbumListViewModel: ObservableObject{
         case error(String)
     }
     
-    @Published var searchText: String = ""
     @Published var albums: [Album] = [Album]()
-    @Published var state: State = .good{
+    @Published var state: State = .empty{
         didSet{
             print("state chenged to: \(state)")
         }
@@ -31,25 +30,7 @@ class AlbumListViewModel: ObservableObject{
     
     var subscriptions = Set<AnyCancellable>()
     
-    init() {
-        $searchText
-            .dropFirst()
-            .debounce(for: .seconds(0.5), scheduler: RunLoop.main)
-            .sink{[weak self] text in
-                self?.state = .good
-                self?.albums = []
-                self?.page = 0
-                self?.getAlbumList(for: text)
-            }.store(in: &subscriptions)
-        
-    }
-    
-    func loadMore(){
-        print("Load More For: \(self.searchText) @ Page: \(self.page)")
-        getAlbumList(for: searchText)
-    }
-    
-    func getAlbumList(for searchText: String) {
+    func getAlbumList(for searchText: String, completion: @escaping () -> Void) {
         
         guard !searchText.isEmpty else {
             self.state = .empty
@@ -68,38 +49,22 @@ class AlbumListViewModel: ObservableObject{
         URLSession.shared.dataTask(with: url){[weak self] data, response, error in
             if let error = error {
                 print("URLSession error: \(error)")
-                DispatchQueue.main.async {
-                    self?.state = .error("Could not load: \(error.localizedDescription)")
-                }
+                self?.state = .error("Could not load: \(error.localizedDescription)")
             } else if let data = data {
                 do {
                     let result = try JSONDecoder().decode(AlbumResult.self, from: data)
-                    DispatchQueue.main.async {
-                        for album in result.results {
-                            self?.albums.append(album)
-                        }
+                    for album in result.results {
+                        self?.albums.append(album)
                     }
                     self?.page += 1
-                    DispatchQueue.main.async {
-                        self?.state = (result.results.count == self?.limit) ? .good : .loadedAll
-                    }
+                    self?.state = (result.results.count == self?.limit) ? .good : .loadedAll
                     print("fetched \(result.resultCount)")
                 } catch {
                     print("AlbumResult Json Decode error: \(error)")
-//                    let str = String(decoding: data, as: UTF8.self)
-//                    print("Json Decode error by Url:\(encondeUrlText)")
-//                    print(encondeUrlText)
-                    DispatchQueue.main.async {
-                        self?.state = .error("Json Decode error: \(error.localizedDescription)")
-                    }
+                    self?.state = .error("Json Decode error: \(error.localizedDescription)")
                 }
             }
+            completion()
         }.resume()
-    }
-    
-    static func example() -> AlbumListViewModel {
-        let vm = AlbumListViewModel()
-        vm.searchText = "Mayday"
-        return vm
     }
 }

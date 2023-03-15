@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		C3479E51766114FA32197C09 /* Pods_iTunes_Search_Application_UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8428213D35DE062E94A5DBE /* Pods_iTunes_Search_Application_UIKit.framework */; };
+		EE85E9A429C1FE2D004D309B /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE85E9A329C1FE2D004D309B /* AlbumCell.swift */; };
+		EE85E9A629C204D4004D309B /* ArtistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE85E9A529C204D4004D309B /* ArtistCell.swift */; };
 		EEB4E59F29C06A63007E3A62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB4E59E29C06A63007E3A62 /* AppDelegate.swift */; };
 		EEB4E5A129C06A63007E3A62 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB4E5A029C06A63007E3A62 /* SceneDelegate.swift */; };
 		EEB4E5A329C06A63007E3A62 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB4E5A229C06A63007E3A62 /* SearchViewController.swift */; };
@@ -21,12 +23,15 @@
 		EEB4E5E429C195F9007E3A62 /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB4E5E329C195F9007E3A62 /* Artist.swift */; };
 		EEB4E5E629C19692007E3A62 /* ArtistLookup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB4E5E529C19692007E3A62 /* ArtistLookup.swift */; };
 		EEB4E5E829C196B1007E3A62 /* AlbumLookup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB4E5E729C196B1007E3A62 /* AlbumLookup.swift */; };
+		EEB4E5EB29C1BBA0007E3A62 /* SongCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB4E5EA29C1BBA0007E3A62 /* SongCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0EFBEE7708B739020BCB8135 /* Pods-iTunes_Search_Application_UIKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iTunes_Search_Application_UIKit.debug.xcconfig"; path = "Target Support Files/Pods-iTunes_Search_Application_UIKit/Pods-iTunes_Search_Application_UIKit.debug.xcconfig"; sourceTree = "<group>"; };
 		21F3CE0ABC88AD2DD66DAB6D /* Pods-iTunes_Search_Application_UIKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iTunes_Search_Application_UIKit.release.xcconfig"; path = "Target Support Files/Pods-iTunes_Search_Application_UIKit/Pods-iTunes_Search_Application_UIKit.release.xcconfig"; sourceTree = "<group>"; };
 		B8428213D35DE062E94A5DBE /* Pods_iTunes_Search_Application_UIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iTunes_Search_Application_UIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE85E9A329C1FE2D004D309B /* AlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCell.swift; sourceTree = "<group>"; };
+		EE85E9A529C204D4004D309B /* ArtistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistCell.swift; sourceTree = "<group>"; };
 		EEB4E59B29C06A63007E3A62 /* iTunes_Search_Application_UIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iTunes_Search_Application_UIKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEB4E59E29C06A63007E3A62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EEB4E5A029C06A63007E3A62 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -42,6 +47,8 @@
 		EEB4E5E329C195F9007E3A62 /* Artist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
 		EEB4E5E529C19692007E3A62 /* ArtistLookup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistLookup.swift; sourceTree = "<group>"; };
 		EEB4E5E729C196B1007E3A62 /* AlbumLookup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumLookup.swift; sourceTree = "<group>"; };
+		EEB4E5EA29C1BBA0007E3A62 /* SongCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongCell.swift; sourceTree = "<group>"; };
+		EEB4E5EF29C1EA76007E3A62 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +104,7 @@
 				EEB4E5DE29C19596007E3A62 /* Model */,
 				EEB4E5D929C16F9E007E3A62 /* ViewModel */,
 				EEB4E5B229C0C1BD007E3A62 /* ViewController */,
+				EEB4E5E929C1BB71007E3A62 /* Cells */,
 				EEB4E59E29C06A63007E3A62 /* AppDelegate.swift */,
 				EEB4E5A029C06A63007E3A62 /* SceneDelegate.swift */,
 				EEB4E5A729C06A64007E3A62 /* Assets.xcassets */,
@@ -134,6 +142,16 @@
 				EEB4E5E529C19692007E3A62 /* ArtistLookup.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		EEB4E5E929C1BB71007E3A62 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				EEB4E5EA29C1BBA0007E3A62 /* SongCell.swift */,
+				EE85E9A329C1FE2D004D309B /* AlbumCell.swift */,
+				EE85E9A529C204D4004D309B /* ArtistCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -180,6 +198,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hant",
 			);
 			mainGroup = EEB4E59229C06A63007E3A62;
 			productRefGroup = EEB4E59C29C06A63007E3A62 /* Products */;
@@ -251,9 +270,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				EEB4E5E029C195A9007E3A62 /* Song.swift in Sources */,
+				EE85E9A429C1FE2D004D309B /* AlbumCell.swift in Sources */,
+				EE85E9A629C204D4004D309B /* ArtistCell.swift in Sources */,
 				EEB4E5A329C06A63007E3A62 /* SearchViewController.swift in Sources */,
 				EEB4E5E629C19692007E3A62 /* ArtistLookup.swift in Sources */,
 				EEB4E5D829C16F9A007E3A62 /* SongListViewModel.swift in Sources */,
+				EEB4E5EB29C1BBA0007E3A62 /* SongCell.swift in Sources */,
 				EEB4E5E429C195F9007E3A62 /* Artist.swift in Sources */,
 				EEB4E59F29C06A63007E3A62 /* AppDelegate.swift in Sources */,
 				EEB4E5DD29C16FCE007E3A62 /* ArtistListViewModel.swift in Sources */,
@@ -271,6 +293,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				EEB4E5AA29C06A64007E3A62 /* Base */,
+				EEB4E5EF29C1EA76007E3A62 /* zh-Hant */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -282,6 +305,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -342,6 +366,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
