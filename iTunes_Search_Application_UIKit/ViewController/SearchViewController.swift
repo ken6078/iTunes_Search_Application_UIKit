@@ -51,6 +51,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         navigationItem.searchController = searchController
         searchController.searchResultsUpdater = self
         searchController.delegate = self
+        searchController.searchBar.searchTextField.clearButtonMode = .never
         navigationItem.hidesSearchBarWhenScrolling = false
         
         view.addSubview(stylePicker)
@@ -169,43 +170,41 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         songListViewModel.songs = []
         albumListViewModel.albums = []
         artistListViewModel.artists = []
-        searchView.reloadData()
-    }
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print("searchText: ",searchText)
+        do {
+            searchView.reloadData()
+        }
     }
     
     func updateSearchResults(for searchController: UISearchController) {
         searchText = searchController.searchBar.text ?? ""
-        
+        print("searchText: ",searchText)
         switch (style) {
         case .song:
             songListViewModel.state = .good
             songListViewModel.songs = []
             songListViewModel.page = 0
-            songListViewModel.getSongList(for: searchText) {
+            songListViewModel.getSongList(for: searchText) { [weak self] in
                 DispatchQueue.main.async {
-                    self.searchView.reloadData()
+                    self?.searchView.reloadData()
                 }
             }
         case .album:
             albumListViewModel.state = .good
             albumListViewModel.albums = []
             albumListViewModel.page = 0
-            albumListViewModel.getAlbumList(for: searchText) {
+            albumListViewModel.getAlbumList(for: searchText) { [weak self] in
                 DispatchQueue.main.async {
                     print("Reload")
-                    self.searchView.reloadData()
+                    self?.searchView.reloadData()
                 }
             }
         case .artist:
             artistListViewModel.state = .good
             artistListViewModel.artists = []
             artistListViewModel.page = 0
-            artistListViewModel.getArtistList(for: searchText) {
+            artistListViewModel.getArtistList(for: searchText) { [weak self] in
                 DispatchQueue.main.async {
-                    self.searchView.reloadData()
+                    self?.searchView.reloadData()
                 }
             }
         }
@@ -219,30 +218,30 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
                 guard songListViewModel.state == .good else {return}
                 print("Load More For: \(searchText) @ Page: \(songListViewModel.page)")
                 searchView.tableFooterView = createSpinenerFooter()
-                songListViewModel.getSongList(for: searchText) {
+                songListViewModel.getSongList(for: searchText) { [weak self] in
                     DispatchQueue.main.async {
-                        self.searchView.tableFooterView = nil
-                        self.searchView.reloadData()
+                        self?.searchView.tableFooterView = nil
+                        self?.searchView.reloadData()
                     }
                 }
             case .album:
                 guard albumListViewModel.state == .good else {return}
                 print("Load More For: \(searchText) @ Page: \(albumListViewModel.page)")
                 searchView.tableFooterView = createSpinenerFooter()
-                albumListViewModel.getAlbumList(for: searchText) {
+                albumListViewModel.getAlbumList(for: searchText) { [weak self] in
                     DispatchQueue.main.async {
-                        self.searchView.tableFooterView = nil
-                        self.searchView.reloadData()
+                        self?.searchView.tableFooterView = nil
+                        self?.searchView.reloadData()
                     }
                 }
             case .artist:
                 guard artistListViewModel.state == .good else {return}
                 print("Load More For: \(searchText) @ Page: \(artistListViewModel.page)")
                 searchView.tableFooterView = createSpinenerFooter()
-                artistListViewModel.getArtistList(for: searchText) {
+                artistListViewModel.getArtistList(for: searchText) { [weak self] in
                     DispatchQueue.main.async {
-                        self.searchView.tableFooterView = nil
-                        self.searchView.reloadData()
+                        self?.searchView.tableFooterView = nil
+                        self?.searchView.reloadData()
                     }
                 }
                 

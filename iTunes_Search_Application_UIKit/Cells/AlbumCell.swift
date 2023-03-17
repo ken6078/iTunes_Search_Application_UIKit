@@ -21,10 +21,6 @@ class AlbumCell: UITableViewCell {
         return label
     }()
     
-    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
-    }
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
@@ -41,7 +37,7 @@ class AlbumCell: UITableViewCell {
         let songImageView = UIImageView(image: image)
         songImageView.layer.masksToBounds = true
         songImageView.layer.cornerRadius = 10
-        getData(from: url) { data, response, error in
+        PictureViewModel.getData(from: url) { data, response, error in
             if let error = error {
                 print("URLSession error: \(error)")
             } else {

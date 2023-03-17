@@ -34,6 +34,7 @@ class AlbumListViewModel: ObservableObject{
         
         guard !searchText.isEmpty else {
             self.state = .empty
+            completion()
             return
         }
         guard self.state == State.good else {return}

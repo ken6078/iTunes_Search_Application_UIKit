@@ -29,18 +29,34 @@ class ArtistCell: UITableViewCell {
     func configure (_ artist: Artist) {
         contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: 80).isActive = true
         
-        let image = UIImage(systemName: "music.mic.circle")
-        let songImageView = UIImageView(image: image)
-        contentView.addSubview(songImageView)
-        songImageView.translatesAutoresizingMaskIntoConstraints = false
-        songImageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        songImageView.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        songImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
-        songImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        let url = URL(string: artist.artistLinkURL)!
+        var image = UIImage(systemName: "music.mic.circle")
+        let artistImageView = UIImageView(image: image)
+        artistImageView.backgroundColor = .white
+//        artistImageView.layer.masksToBounds = true
+//        artistImageView.layer.cornerRadius = 30
+        PictureViewModel.getDataFromHTML(url: url, pictureHtmlIndex: 16) { data in
+            image = UIImage(data: data)
+            PictureViewModel.cropImage(uiImage: image!, magnification: 2) { newImage in
+                DispatchQueue.main.async {
+                    artistImageView.image = newImage
+                    artistImageView.layer.masksToBounds = true
+                    artistImageView.layer.cornerRadius = 30
+                    artistImageView.widthAnchor.constraint(equalToConstant: 59).isActive = true
+                    artistImageView.heightAnchor.constraint(equalToConstant: 59).isActive = true
+                }
+            }
+        }
+        contentView.addSubview(artistImageView)
+        artistImageView.translatesAutoresizingMaskIntoConstraints = false
+        artistImageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        artistImageView.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        artistImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
+        artistImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         
         artistNameTitle.text = artist.artistName
         contentView.addSubview(artistNameTitle)
-        artistNameTitle.leadingAnchor.constraint(equalTo: songImageView.trailingAnchor, constant: 10).isActive = true
+        artistNameTitle.leadingAnchor.constraint(equalTo: artistImageView.trailingAnchor, constant: 10).isActive = true
         artistNameTitle.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -50).isActive = true
         artistNameTitle.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
     }

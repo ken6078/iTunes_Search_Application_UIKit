@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C3479E51766114FA32197C09 /* Pods_iTunes_Search_Application_UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8428213D35DE062E94A5DBE /* Pods_iTunes_Search_Application_UIKit.framework */; };
+		EE46F72929C415F600EA7F6D /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE46F72829C415F600EA7F6D /* SoundManager.swift */; };
 		EE85E9A429C1FE2D004D309B /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE85E9A329C1FE2D004D309B /* AlbumCell.swift */; };
 		EE85E9A629C204D4004D309B /* ArtistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE85E9A529C204D4004D309B /* ArtistCell.swift */; };
 		EE85E9A829C20DBB004D309B /* SongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE85E9A729C20DBB004D309B /* SongViewController.swift */; };
@@ -32,6 +33,7 @@
 		0EFBEE7708B739020BCB8135 /* Pods-iTunes_Search_Application_UIKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iTunes_Search_Application_UIKit.debug.xcconfig"; path = "Target Support Files/Pods-iTunes_Search_Application_UIKit/Pods-iTunes_Search_Application_UIKit.debug.xcconfig"; sourceTree = "<group>"; };
 		21F3CE0ABC88AD2DD66DAB6D /* Pods-iTunes_Search_Application_UIKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iTunes_Search_Application_UIKit.release.xcconfig"; path = "Target Support Files/Pods-iTunes_Search_Application_UIKit/Pods-iTunes_Search_Application_UIKit.release.xcconfig"; sourceTree = "<group>"; };
 		B8428213D35DE062E94A5DBE /* Pods_iTunes_Search_Application_UIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iTunes_Search_Application_UIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE46F72829C415F600EA7F6D /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		EE85E9A329C1FE2D004D309B /* AlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCell.swift; sourceTree = "<group>"; };
 		EE85E9A529C204D4004D309B /* ArtistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistCell.swift; sourceTree = "<group>"; };
 		EE85E9A729C20DBB004D309B /* SongViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongViewController.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				EEB4E5DA29C16FC3007E3A62 /* AlbumListViewModel.swift */,
 				EEB4E5DC29C16FCE007E3A62 /* ArtistListViewModel.swift */,
 				EE85E9AA29C231C6004D309B /* PictureViewModel.swift */,
+				EE46F72829C415F600EA7F6D /* SoundManager.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 				EE85E9A829C20DBB004D309B /* SongViewController.swift in Sources */,
 				EEB4E5E829C196B1007E3A62 /* AlbumLookup.swift in Sources */,
 				EEB4E5E229C195DC007E3A62 /* Album.swift in Sources */,
+				EE46F72929C415F600EA7F6D /* SoundManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
