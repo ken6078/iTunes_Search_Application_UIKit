@@ -138,9 +138,9 @@ class SongViewController: UIViewController {
         title = song.trackName
         navigationController?.navigationBar.prefersLargeTitles = false
         
-        let add = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareButtonAction))
-        let play = UIBarButtonItem(image: UIImage(systemName: "music.note.tv"), style: .plain, target: self, action: #selector(webPageButtonAction))
-        navigationItem.rightBarButtonItems = [add, play]
+        let shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareButtonAction))
+        let safariButton = UIBarButtonItem(image: UIImage(systemName: "music.note.tv"), style: .plain, target: self, action: #selector(webPageButtonAction))
+        navigationItem.rightBarButtonItems = [shareButton, safariButton]
         
         view.addSubview(songImageView)
         songImageView.translatesAutoresizingMaskIntoConstraints = false
