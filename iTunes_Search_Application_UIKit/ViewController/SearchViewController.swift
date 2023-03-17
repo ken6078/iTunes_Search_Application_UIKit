@@ -62,9 +62,9 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         stylePicker.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor).isActive = true
         
         searchView.register(UITableViewCell.self, forCellReuseIdentifier: "SearchCell")
-        searchView.register(SongCell.self, forCellReuseIdentifier: "SongCell")
-        searchView.register(AlbumCell.self, forCellReuseIdentifier: "AlbumCell")
-        searchView.register(ArtistCell.self, forCellReuseIdentifier: "ArtistCell")
+        searchView.register(SongSearchCell.self, forCellReuseIdentifier: "SongCell")
+        searchView.register(AlbumSearchCell.self, forCellReuseIdentifier: "AlbumCell")
+        searchView.register(ArtistSearchCell.self, forCellReuseIdentifier: "ArtistCell")
         searchView.delegate = self
         searchView.dataSource = self
         view.addSubview(searchView)
@@ -89,21 +89,21 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch (style) {
         case .song:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "SongCell", for: indexPath) as? SongCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "SongCell", for: indexPath) as? SongSearchCell else {
                 fatalError("SongCell is not defined!")
             }
             let song = songListViewModel.songs[indexPath.row]
             cell.configure(song)
             return cell
         case .album:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "AlbumCell", for: indexPath) as? AlbumCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "AlbumCell", for: indexPath) as? AlbumSearchCell else {
                 fatalError("AlbumCell is not defined!")
             }
             let album = albumListViewModel.albums[indexPath.row]
             cell.configure(album)
             return cell
         case .artist:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ArtistCell", for: indexPath) as? ArtistCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ArtistCell", for: indexPath) as? ArtistSearchCell else {
                 fatalError("ArtistCell is not defined!")
             }
             let artist = artistListViewModel.artists[indexPath.row]

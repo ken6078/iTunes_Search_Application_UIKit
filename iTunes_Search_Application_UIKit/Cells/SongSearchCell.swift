@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SongCell: UITableViewCell {
+class SongSearchCell: UITableViewCell {
     
     lazy var trackNameTitle: UILabel = {
         let label = UILabel()

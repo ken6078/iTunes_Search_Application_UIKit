@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AlbumCell: UITableViewCell {
+class AlbumSearchCell: UITableViewCell {
     
     lazy var collectionNameTitle: UILabel = {
         let label = UILabel()

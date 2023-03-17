@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ArtistCell: UITableViewCell {
+class ArtistSearchCell: UITableViewCell {
     lazy var artistNameTitle: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
