@@ -8,7 +8,6 @@
 import UIKit
 
 class SearchViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchControllerDelegate, UISearchResultsUpdating, UIScrollViewDelegate{
-    
     let songListViewModel = SongListViewModel()
     let albumListViewModel = AlbumListViewModel()
     let artistListViewModel = ArtistListViewModel()
@@ -119,7 +118,8 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
             let newViewController = SongViewController(song: songListViewModel.songs[indexPath.row])
             navigationController!.pushViewController(newViewController, animated: true)
         case .album:
-            break
+            let newViewController = AlbumViewController(albumId: albumListViewModel.albums[indexPath.row].id)
+            navigationController!.pushViewController(newViewController, animated: true)
         case .artist:
             break
         }

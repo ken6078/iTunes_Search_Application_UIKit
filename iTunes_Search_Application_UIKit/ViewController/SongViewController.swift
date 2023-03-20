@@ -205,6 +205,9 @@ class SongViewController: UIViewController {
     
     @objc func albumButtonAction() {
         print("TapAlbum")
+        let navigationController = navigationController
+        let newViewController = AlbumViewController(albumId: song.collectionId)
+        navigationController!.pushViewController(newViewController, animated: true)
     }
     
     @objc func artistButtonAction() {
