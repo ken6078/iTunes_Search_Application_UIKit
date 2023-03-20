@@ -52,18 +52,16 @@ class ArtistViewController: UIViewController, UITableViewDataSource, UITableView
         return imageView
     }()
     
-    lazy var artistNameTitle: UILabel = {
+    lazy var artistNameLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 20)
         label.textAlignment = .left
         label.numberOfLines = 3
         return label
     }()
     
-    lazy var albumListTitle: UILabel = {
+    lazy var albumListLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.textAlignment = .left
         label.text = "最新專輯"
@@ -107,24 +105,24 @@ class ArtistViewController: UIViewController, UITableViewDataSource, UITableView
                 self.albumImageView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 15).isActive = true
                 self.albumImageView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 120).isActive = true
                 
-                self.artistNameTitle.text = self.artistDetailViewModel.artist?.artistName
-                self.view.addSubview(self.artistNameTitle)
-                self.artistNameTitle.translatesAutoresizingMaskIntoConstraints = false
-                self.artistNameTitle.centerYAnchor.constraint(equalTo: self.albumImageView.centerYAnchor).isActive = true
-                self.artistNameTitle.leadingAnchor.constraint(equalTo: self.albumImageView.trailingAnchor, constant: 10).isActive = true
-                self.artistNameTitle.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -15).isActive = true
+                self.artistNameLabel.text = self.artistDetailViewModel.artist?.artistName
+                self.view.addSubview(self.artistNameLabel)
+                self.artistNameLabel.translatesAutoresizingMaskIntoConstraints = false
+                self.artistNameLabel.centerYAnchor.constraint(equalTo: self.albumImageView.centerYAnchor).isActive = true
+                self.artistNameLabel.leadingAnchor.constraint(equalTo: self.albumImageView.trailingAnchor, constant: 10).isActive = true
+                self.artistNameLabel.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -15).isActive = true
                 
-                self.view.addSubview(self.albumListTitle)
-                self.albumListTitle.translatesAutoresizingMaskIntoConstraints = false
-                self.albumListTitle.topAnchor.constraint(equalTo: self.albumImageView.bottomAnchor, constant: 10).isActive = true
-                self.albumListTitle.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 15).isActive = true
+                self.view.addSubview(self.albumListLabel)
+                self.albumListLabel.translatesAutoresizingMaskIntoConstraints = false
+                self.albumListLabel.topAnchor.constraint(equalTo: self.albumImageView.bottomAnchor, constant: 10).isActive = true
+                self.albumListLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 15).isActive = true
                 
                 self.albumListView.register(AlbumListCell.self, forCellReuseIdentifier: "AlbumListCell")
                 self.albumListView.delegate = self
                 self.albumListView.dataSource = self
                 self.view.addSubview(self.albumListView)
                 self.albumListView.translatesAutoresizingMaskIntoConstraints = false
-                self.albumListView.topAnchor.constraint(equalTo: self.albumListTitle.bottomAnchor, constant: 10).isActive = true
+                self.albumListView.topAnchor.constraint(equalTo: self.albumListLabel.bottomAnchor, constant: 10).isActive = true
                 self.albumListView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
                 self.albumListView.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor).isActive = true
                 self.albumListView.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: 0).isActive = true

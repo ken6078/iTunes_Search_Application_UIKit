@@ -8,10 +8,10 @@
 import UIKit
 
 class ArtistSearchCell: UITableViewCell {
-    lazy var artistNameTitle: UILabel = {
+    
+    lazy var artistNameLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 3
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -19,21 +19,11 @@ class ArtistSearchCell: UITableViewCell {
         URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }
     
-    
-    lazy var rightArrowUIImageView: UIImageView = {
+    lazy var rightArrowImageView: UIImageView = {
         let image = UIImage(systemName: "chevron.right")!.imageWithColor(newColor: UIColor.systemGray4)
-        let songImageView = UIImageView(image: image)
-        songImageView.translatesAutoresizingMaskIntoConstraints = false
-        return songImageView
+        let imageView = UIImageView(image: image)
+        return imageView
     }()
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
     
     func configure (_ artist: Artist) {
         contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: 80).isActive = true
@@ -54,22 +44,24 @@ class ArtistSearchCell: UITableViewCell {
         }
         contentView.addSubview(artistImageView)
         artistImageView.translatesAutoresizingMaskIntoConstraints = false
+        artistImageView.translatesAutoresizingMaskIntoConstraints = false
         artistImageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
         artistImageView.heightAnchor.constraint(equalToConstant: 60).isActive = true
         artistImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
         artistImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         
-        artistNameTitle.text = artist.artistName
-        contentView.addSubview(artistNameTitle)
-        artistNameTitle.leadingAnchor.constraint(equalTo: artistImageView.trailingAnchor, constant: 10).isActive = true
-        artistNameTitle.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -28).isActive = true
-        artistNameTitle.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        artistNameLabel.text = artist.artistName
+        contentView.addSubview(artistNameLabel)
+        artistNameLabel.leadingAnchor.constraint(equalTo: artistImageView.trailingAnchor, constant: 10).isActive = true
+        artistNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -28).isActive = true
+        artistNameLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         
-        contentView.addSubview(rightArrowUIImageView)
-        rightArrowUIImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12).isActive = true
-        rightArrowUIImageView.widthAnchor.constraint(equalToConstant: 8).isActive = true
-        rightArrowUIImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        rightArrowUIImageView.heightAnchor.constraint(equalToConstant: 12).isActive = true
+        contentView.addSubview(rightArrowImageView)
+        rightArrowImageView.translatesAutoresizingMaskIntoConstraints = false
+        rightArrowImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12).isActive = true
+        rightArrowImageView.widthAnchor.constraint(equalToConstant: 8).isActive = true
+        rightArrowImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        rightArrowImageView.heightAnchor.constraint(equalToConstant: 12).isActive = true
     }
 
 }

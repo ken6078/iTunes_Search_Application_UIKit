@@ -15,7 +15,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     let stylePicker = SearchViewController.segmentedControl
     var selectedSegmentIndex = 0
     
-    let searchView = UITableView()
+    let searchTableView = UITableView()
     
     var searchText: String = ""
     
@@ -60,18 +60,17 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         stylePicker.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor).isActive = true
         stylePicker.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor).isActive = true
         
-        searchView.register(UITableViewCell.self, forCellReuseIdentifier: "SearchCell")
-        searchView.register(SongSearchCell.self, forCellReuseIdentifier: "SongCell")
-        searchView.register(AlbumSearchCell.self, forCellReuseIdentifier: "AlbumCell")
-        searchView.register(ArtistSearchCell.self, forCellReuseIdentifier: "ArtistCell")
-        searchView.delegate = self
-        searchView.dataSource = self
-        view.addSubview(searchView)
-        searchView.translatesAutoresizingMaskIntoConstraints = false
-        searchView.topAnchor.constraint(equalTo: stylePicker.bottomAnchor).isActive = true
-        searchView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        searchView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor).isActive = true
-        searchView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor).isActive = true
+        searchTableView.register(SongSearchCell.self, forCellReuseIdentifier: "SongCell")
+        searchTableView.register(AlbumSearchCell.self, forCellReuseIdentifier: "AlbumCell")
+        searchTableView.register(ArtistSearchCell.self, forCellReuseIdentifier: "ArtistCell")
+        searchTableView.delegate = self
+        searchTableView.dataSource = self
+        view.addSubview(searchTableView)
+        searchTableView.translatesAutoresizingMaskIntoConstraints = false
+        searchTableView.topAnchor.constraint(equalTo: stylePicker.bottomAnchor).isActive = true
+        searchTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        searchTableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor).isActive = true
+        searchTableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor).isActive = true
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -89,21 +88,21 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         switch (style) {
         case .song:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "SongCell", for: indexPath) as? SongSearchCell else {
-                fatalError("SongCell is not defined!")
+                fatalError("SongSearchCell is not defined!")
             }
             let song = songListViewModel.songs[indexPath.row]
             cell.configure(song)
             return cell
         case .album:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "AlbumCell", for: indexPath) as? AlbumSearchCell else {
-                fatalError("AlbumCell is not defined!")
+                fatalError("AlbumSearchCell is not defined!")
             }
             let album = albumListViewModel.albums[indexPath.row]
             cell.configure(album)
             return cell
         case .artist:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ArtistCell", for: indexPath) as? ArtistSearchCell else {
-                fatalError("ArtistCell is not defined!")
+                fatalError("ArtistSearchCell is not defined!")
             }
             let artist = artistListViewModel.artists[indexPath.row]
             cell.configure(artist)
@@ -145,12 +144,10 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         } else if index == 2 {
             style = .artist
         }
-        print("searchView.reloadData()")
-        self.searchView.reloadData()
+        self.searchTableView.reloadData()
     }
     
     func didPresentSearchController(_ searchController: UISearchController) {
-        print("didPresentSearchController")
         selectedSegmentIndex = stylePicker.selectedSegmentIndex
         if (selectedSegmentIndex != 0) {
             self.stylePicker.setEnabled(false, forSegmentAt: 0)
@@ -164,7 +161,6 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func willDismissSearchController(_ searchController: UISearchController) {
-        print("willDismissSearchController")
         self.stylePicker.setEnabled(true, forSegmentAt: 0)
         self.stylePicker.setEnabled(true, forSegmentAt: 1)
         self.stylePicker.setEnabled(true, forSegmentAt: 2)
@@ -172,7 +168,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         albumListViewModel.albums = []
         artistListViewModel.artists = []
         do {
-            searchView.reloadData()
+            searchTableView.reloadData()
         }
     }
     
@@ -186,7 +182,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
             songListViewModel.page = 0
             songListViewModel.getSongList(for: searchText) { [weak self] in
                 DispatchQueue.main.async {
-                    self?.searchView.reloadData()
+                    self?.searchTableView.reloadData()
                 }
             }
         case .album:
@@ -195,8 +191,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
             albumListViewModel.page = 0
             albumListViewModel.getAlbumList(for: searchText) { [weak self] in
                 DispatchQueue.main.async {
-                    print("Reload")
-                    self?.searchView.reloadData()
+                    self?.searchTableView.reloadData()
                 }
             }
         case .artist:
@@ -205,7 +200,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
             artistListViewModel.page = 0
             artistListViewModel.getArtistList(for: searchText) { [weak self] in
                 DispatchQueue.main.async {
-                    self?.searchView.reloadData()
+                    self?.searchTableView.reloadData()
                 }
             }
         }
@@ -213,41 +208,39 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let position = scrollView.contentOffset.y
-        if position > searchView.contentSize.height - 100 - scrollView.frame.height {
+        if position > searchTableView.contentSize.height - 100 - scrollView.frame.height {
             switch (style) {
             case .song:
                 guard songListViewModel.state == .good else {return}
                 print("Load More For: \(searchText) @ Page: \(songListViewModel.page)")
-                searchView.tableFooterView = createSpinenerFooter()
+                searchTableView.tableFooterView = createSpinenerFooter()
                 songListViewModel.getSongList(for: searchText) { [weak self] in
                     DispatchQueue.main.async {
-                        self?.searchView.tableFooterView = nil
-                        self?.searchView.reloadData()
+                        self?.searchTableView.tableFooterView = nil
+                        self?.searchTableView.reloadData()
                     }
                 }
             case .album:
                 guard albumListViewModel.state == .good else {return}
                 print("Load More For: \(searchText) @ Page: \(albumListViewModel.page)")
-                searchView.tableFooterView = createSpinenerFooter()
+                searchTableView.tableFooterView = createSpinenerFooter()
                 albumListViewModel.getAlbumList(for: searchText) { [weak self] in
                     DispatchQueue.main.async {
-                        self?.searchView.tableFooterView = nil
-                        self?.searchView.reloadData()
+                        self?.searchTableView.tableFooterView = nil
+                        self?.searchTableView.reloadData()
                     }
                 }
             case .artist:
                 guard artistListViewModel.state == .good else {return}
                 print("Load More For: \(searchText) @ Page: \(artistListViewModel.page)")
-                searchView.tableFooterView = createSpinenerFooter()
+                searchTableView.tableFooterView = createSpinenerFooter()
                 artistListViewModel.getArtistList(for: searchText) { [weak self] in
                     DispatchQueue.main.async {
-                        self?.searchView.tableFooterView = nil
-                        self?.searchView.reloadData()
+                        self?.searchTableView.tableFooterView = nil
+                        self?.searchTableView.reloadData()
                     }
                 }
-                
             }
         }
     }
-    
 }

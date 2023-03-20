@@ -9,7 +9,7 @@ import UIKit
 
 class AlbumListCell: UITableViewCell {
     
-    lazy var albumNameTitle: UILabel = {
+    lazy var albumNameLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 2
         return label
@@ -21,15 +21,13 @@ class AlbumListCell: UITableViewCell {
         return label
     }()
     
-    lazy var rightArrowUIImageView: UIImageView = {
+    lazy var rightArrowImageView: UIImageView = {
         let image = UIImage(systemName: "chevron.right")!.imageWithColor(newColor: UIColor.systemGray4)
-        let songImageView = UIImageView(image: image)
-        songImageView.translatesAutoresizingMaskIntoConstraints = false
-        return songImageView
+        let imageView = UIImageView(image: image)
+        return imageView
     }()
     
     func configure (_ album: Album) {
-//        contentView.translatesAutoresizingMaskIntoConstraints = false
         contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: 80).isActive = true
         
         let url = URL(string: album.artworkUrl100)!
@@ -53,24 +51,25 @@ class AlbumListCell: UITableViewCell {
         songImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
         songImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         
-        albumNameTitle.text = album.collectionName
-        contentView.addSubview(albumNameTitle)
-        albumNameTitle.translatesAutoresizingMaskIntoConstraints = false
-        albumNameTitle.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -10).isActive = true
-        albumNameTitle.leadingAnchor.constraint(equalTo: songImageView.trailingAnchor, constant: 10).isActive = true
-        albumNameTitle.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -30).isActive = true
+        albumNameLabel.text = album.collectionName
+        contentView.addSubview(albumNameLabel)
+        albumNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        albumNameLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -10).isActive = true
+        albumNameLabel.leadingAnchor.constraint(equalTo: songImageView.trailingAnchor, constant: 10).isActive = true
+        albumNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -30).isActive = true
         
         releaseDateLabel.text = String(album.releaseDate.prefix(10))
         contentView.addSubview(releaseDateLabel)
         releaseDateLabel.translatesAutoresizingMaskIntoConstraints = false
-        releaseDateLabel.topAnchor.constraint(equalTo: albumNameTitle.bottomAnchor, constant: 2).isActive = true
+        releaseDateLabel.topAnchor.constraint(equalTo: albumNameLabel.bottomAnchor, constant: 2).isActive = true
         releaseDateLabel.leadingAnchor.constraint(equalTo: songImageView.trailingAnchor, constant: 10).isActive = true
         releaseDateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -30).isActive = true
         
-        contentView.addSubview(rightArrowUIImageView)
-        rightArrowUIImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12).isActive = true
-        rightArrowUIImageView.widthAnchor.constraint(equalToConstant: 8).isActive = true
-        rightArrowUIImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        rightArrowUIImageView.heightAnchor.constraint(equalToConstant: 12).isActive = true
+        contentView.addSubview(rightArrowImageView)
+        rightArrowImageView.translatesAutoresizingMaskIntoConstraints = false
+        rightArrowImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12).isActive = true
+        rightArrowImageView.widthAnchor.constraint(equalToConstant: 8).isActive = true
+        rightArrowImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        rightArrowImageView.heightAnchor.constraint(equalToConstant: 12).isActive = true
     }
 }

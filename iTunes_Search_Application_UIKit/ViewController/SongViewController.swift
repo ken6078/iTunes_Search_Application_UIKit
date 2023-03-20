@@ -41,52 +41,33 @@ class SongViewController: UIViewController {
         return imageView
     }()
     
-    lazy var songNameTitle: UILabel = {
+    lazy var songNameLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "PingFang SC", size: 28)
+        label.font = UIFont.systemFont(ofSize: 28)
         label.textAlignment = .center
         return label
     }()
     
-    lazy var artistNameTitle: UILabel = {
+    lazy var artistNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "PingFang SC", size: 28)
+        label.font = UIFont.systemFont(ofSize: 28)
         label.textAlignment = .center
         return label
     }()
     
-    lazy var albumNameTitle: UILabel = {
+    lazy var albumNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "PingFang SC", size: 18)
+        label.font = UIFont.systemFont(ofSize: 18)
         label.textAlignment = .center
         return label
     }()
     
-    lazy var releaseDateTitle: UILabel = {
+    lazy var releaseDateLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "PingFang SC", size: 28)
-        label.textAlignment = .center
-        return label
-    }()
-    
-    lazy var albumIconTitle: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "PingFang SC", size: 18)
-        label.textColor = .systemBlue
-        label.textAlignment = .center
-        return label
-    }()
-    
-    lazy var artistIconTitle: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "PingFang SC", size: 18)
-        label.textColor = .systemBlue
+        label.font = UIFont.systemFont(ofSize: 28)
         label.textAlignment = .center
         return label
     }()
@@ -111,7 +92,7 @@ class SongViewController: UIViewController {
         return button
     }()
     
-    lazy var playButtonBackGround: UIView = {
+    lazy var playButtonBackGroundView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemBackground
         view.layer.cornerRadius = 36
@@ -149,47 +130,54 @@ class SongViewController: UIViewController {
         songImageView.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant: -100).isActive = true
         songImageView.trailingAnchor.constraint(equalTo: view.centerXAnchor, constant: 100).isActive = true
         
-        songNameTitle.text = song.trackName
-        view.addSubview(songNameTitle)
-        songNameTitle.topAnchor.constraint(equalTo: view.centerYAnchor, constant: 30).isActive = true
-        songNameTitle.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-        songNameTitle.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        songNameLabel.text = song.trackName
+        view.addSubview(songNameLabel)
+        songNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        songNameLabel.topAnchor.constraint(equalTo: view.centerYAnchor, constant: 30).isActive = true
+        songNameLabel.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        songNameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
-        artistNameTitle.text = song.artistName
-        view.addSubview(artistNameTitle)
-        artistNameTitle.topAnchor.constraint(equalTo: songNameTitle.centerYAnchor, constant: 24).isActive = true
-        artistNameTitle.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-        artistNameTitle.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        artistNameLabel.text = song.artistName
+        view.addSubview(artistNameLabel)
+        artistNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        artistNameLabel.topAnchor.constraint(equalTo: songNameLabel.centerYAnchor, constant: 24).isActive = true
+        artistNameLabel.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        artistNameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
-        albumNameTitle.text = "專輯: " + song.collectionName
-        view.addSubview(albumNameTitle)
-        albumNameTitle.topAnchor.constraint(equalTo: artistNameTitle.centerYAnchor, constant: 24).isActive = true
-        albumNameTitle.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-        albumNameTitle.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        albumNameLabel.text = "專輯: " + song.collectionName
+        view.addSubview(albumNameLabel)
+        albumNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        albumNameLabel.topAnchor.constraint(equalTo: artistNameLabel.centerYAnchor, constant: 24).isActive = true
+        albumNameLabel.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        albumNameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
-        releaseDateTitle.text = String(song.releaseDate.prefix(10))
-        view.addSubview(releaseDateTitle)
-        releaseDateTitle.topAnchor.constraint(equalTo: albumNameTitle.centerYAnchor, constant: 14).isActive = true
-        releaseDateTitle.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-        releaseDateTitle.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        releaseDateLabel.text = String(song.releaseDate.prefix(10))
+        view.addSubview(releaseDateLabel)
+        releaseDateLabel.translatesAutoresizingMaskIntoConstraints = false
+        releaseDateLabel.topAnchor.constraint(equalTo: albumNameLabel.centerYAnchor, constant: 14).isActive = true
+        releaseDateLabel.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        releaseDateLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         let xUnit = view.frame.width / 3
         
         view.addSubview(albumButton)
+        albumButton.translatesAutoresizingMaskIntoConstraints = false
         albumButton.centerXAnchor.constraint(equalTo: view.leftAnchor, constant: xUnit).isActive = true
         albumButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
         
         
         view.addSubview(artistButton)
+        artistButton.translatesAutoresizingMaskIntoConstraints = false
         artistButton.centerXAnchor.constraint(equalTo: view.leftAnchor, constant: xUnit*2).isActive = true
         artistButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
         
-        view.addSubview(playButtonBackGround)
-        playButtonBackGround.translatesAutoresizingMaskIntoConstraints = false
-        playButtonBackGround.widthAnchor.constraint(equalToConstant: 72).isActive = true
-        playButtonBackGround.heightAnchor.constraint(equalToConstant: 72).isActive = true
-        playButtonBackGround.trailingAnchor.constraint(equalTo: songImageView.trailingAnchor).isActive = true
-        playButtonBackGround.bottomAnchor.constraint(equalTo: songImageView.bottomAnchor).isActive = true
+        view.addSubview(playButtonBackGroundView)
+        playButtonBackGroundView.translatesAutoresizingMaskIntoConstraints = false
+        playButtonBackGroundView.translatesAutoresizingMaskIntoConstraints = false
+        playButtonBackGroundView.widthAnchor.constraint(equalToConstant: 72).isActive = true
+        playButtonBackGroundView.heightAnchor.constraint(equalToConstant: 72).isActive = true
+        playButtonBackGroundView.trailingAnchor.constraint(equalTo: songImageView.trailingAnchor).isActive = true
+        playButtonBackGroundView.bottomAnchor.constraint(equalTo: songImageView.bottomAnchor).isActive = true
         
         view.addSubview(playButton)
         playButton.translatesAutoresizingMaskIntoConstraints = false
@@ -204,14 +192,12 @@ class SongViewController: UIViewController {
     }
     
     @objc func albumButtonAction() {
-        print("TapAlbum")
         let navigationController = navigationController
         let newViewController = AlbumViewController(albumId: song.collectionId)
         navigationController!.pushViewController(newViewController, animated: true)
     }
     
     @objc func artistButtonAction() {
-        print("TapArtist")
         let navigationController = navigationController
         let newViewController = ArtistViewController(artistId: song.artistID)
         navigationController!.pushViewController(newViewController, animated: true)
@@ -224,17 +210,14 @@ class SongViewController: UIViewController {
     }
     
     @IBAction func shareButtonAction(_ sender: UIButton) {
-            
         // text to share
         let text = self.song.collectionViewURL
-        
         // set up activity view controller
         let textToShare = [ text ]
         let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
         // exclude some activity types from the list (optional)
         activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook ]
-        
         // present the view controller
         self.present(activityViewController, animated: true, completion: nil)
     }
@@ -269,61 +252,4 @@ public extension UIButton {
           self.imageEdgeInsets = UIEdgeInsets(top: -(titleSize.height + spacing), left: 0.0, bottom: 0.0, right: -titleSize.width)
       }
   }
-}
-
-extension UIImage {
-    func resized(withPercentage percentage: CGFloat, isOpaque: Bool = true) -> UIImage? {
-        let canvas = CGSize(width: size.width * percentage, height: size.height * percentage)
-        let format = imageRendererFormat
-        format.opaque = isOpaque
-        return UIGraphicsImageRenderer(size: canvas, format: format).image {
-            _ in draw(in: CGRect(origin: .zero, size: canvas))
-        }
-    }
-    func resized(toWidth width: CGFloat, isOpaque: Bool = true) -> UIImage? {
-        let canvas = CGSize(width: width, height: CGFloat(ceil(width/size.width * size.height)))
-        let format = imageRendererFormat
-        format.opaque = isOpaque
-        return UIGraphicsImageRenderer(size: canvas, format: format).image {
-            _ in draw(in: CGRect(origin: .zero, size: canvas))
-        }
-    }
-}
-
-extension UIImage {
-
-    convenience init?(imageName: String) {
-        self.init(named: imageName)
-        accessibilityIdentifier = imageName
-    }
-
-    // https://stackoverflow.com/a/40177870/4488252
-    func imageWithColor (newColor: UIColor?) -> UIImage? {
-
-        if let newColor = newColor {
-            UIGraphicsBeginImageContextWithOptions(size, false, scale)
-
-            let context = UIGraphicsGetCurrentContext()!
-            context.translateBy(x: 0, y: size.height)
-            context.scaleBy(x: 1.0, y: -1.0)
-            context.setBlendMode(.normal)
-
-            let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-            context.clip(to: rect, mask: cgImage!)
-
-            newColor.setFill()
-            context.fill(rect)
-
-            let newImage = UIGraphicsGetImageFromCurrentImageContext()!
-            UIGraphicsEndImageContext()
-            newImage.accessibilityIdentifier = accessibilityIdentifier
-            return newImage
-        }
-
-        if let accessibilityIdentifier = accessibilityIdentifier {
-            return UIImage(imageName: accessibilityIdentifier)
-        }
-
-        return self
-    }
 }

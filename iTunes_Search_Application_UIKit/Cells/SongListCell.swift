@@ -8,46 +8,42 @@
 import UIKit
 
 class SongListCell: UITableViewCell {
+    
     lazy var indexLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .lightGray
         return label
     }()
     
-    lazy var trackNameTitle: UILabel = {
+    lazy var trackNameLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     lazy var timeLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-//        label.textColor = .lightGray
         return label
     }()
     
-    lazy var rightArrowUIImageView: UIImageView = {
+    lazy var rightArrowImageView: UIImageView = {
         let image = UIImage(systemName: "chevron.right")!.imageWithColor(newColor: UIColor.systemGray4)
-        let songImageView = UIImageView(image: image)
-        songImageView.translatesAutoresizingMaskIntoConstraints = false
-        return songImageView
+        let imageView = UIImageView(image: image)
+        return imageView
     }()
     
     func configure (_ song: Song) {
-//        contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: 40).isActive = true
-        
         indexLabel.text = "\(song.trackNumber! + (song.discNumber!-1)*song.trackCount!)"
         contentView.addSubview(indexLabel)
+        indexLabel.translatesAutoresizingMaskIntoConstraints = false
         indexLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15).isActive = true
         indexLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         
-        trackNameTitle.text = song.trackName
-        contentView.addSubview(trackNameTitle)
-        trackNameTitle.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 40).isActive = true
-        trackNameTitle.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -60).isActive = true
-        trackNameTitle.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        trackNameLabel.text = song.trackName
+        contentView.addSubview(trackNameLabel)
+        trackNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        trackNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 40).isActive = true
+        trackNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -60).isActive = true
+        trackNameLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         
         timeLabel.text = String(
             format: "%d:%02d",
@@ -56,16 +52,15 @@ class SongListCell: UITableViewCell {
         )
         
         contentView.addSubview(timeLabel)
-//        timeLabel.leadingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -75).isActive = true
+        timeLabel.translatesAutoresizingMaskIntoConstraints = false
         timeLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -28).isActive = true
         timeLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         
-        contentView.addSubview(rightArrowUIImageView)
-        rightArrowUIImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12).isActive = true
-        rightArrowUIImageView.widthAnchor.constraint(equalToConstant: 8).isActive = true
-        rightArrowUIImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        rightArrowUIImageView.heightAnchor.constraint(equalToConstant: 12).isActive = true
+        contentView.addSubview(rightArrowImageView)
+        rightArrowImageView.translatesAutoresizingMaskIntoConstraints = false
+        rightArrowImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12).isActive = true
+        rightArrowImageView.widthAnchor.constraint(equalToConstant: 8).isActive = true
+        rightArrowImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        rightArrowImageView.heightAnchor.constraint(equalToConstant: 12).isActive = true
     }
-    
-    
 }

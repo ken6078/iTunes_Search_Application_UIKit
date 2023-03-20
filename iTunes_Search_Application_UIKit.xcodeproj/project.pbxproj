@@ -15,6 +15,7 @@
 		EE470FE329C84B6200C5F4A6 /* ArtistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE470FE229C84B6200C5F4A6 /* ArtistViewController.swift */; };
 		EE470FE529C84BA400C5F4A6 /* ArtistDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE470FE429C84BA400C5F4A6 /* ArtistDetailViewModel.swift */; };
 		EE470FE729C84DDD00C5F4A6 /* AlbumListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE470FE629C84DDD00C5F4A6 /* AlbumListCell.swift */; };
+		EE470FEA29C87E5200C5F4A6 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE470FE929C87E5200C5F4A6 /* UIImage.swift */; };
 		EE85E9A429C1FE2D004D309B /* AlbumSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE85E9A329C1FE2D004D309B /* AlbumSearchCell.swift */; };
 		EE85E9A629C204D4004D309B /* ArtistSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE85E9A529C204D4004D309B /* ArtistSearchCell.swift */; };
 		EE85E9A829C20DBB004D309B /* SongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE85E9A729C20DBB004D309B /* SongViewController.swift */; };
@@ -46,6 +47,7 @@
 		EE470FE229C84B6200C5F4A6 /* ArtistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistViewController.swift; sourceTree = "<group>"; };
 		EE470FE429C84BA400C5F4A6 /* ArtistDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistDetailViewModel.swift; sourceTree = "<group>"; };
 		EE470FE629C84DDD00C5F4A6 /* AlbumListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumListCell.swift; sourceTree = "<group>"; };
+		EE470FE929C87E5200C5F4A6 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		EE85E9A329C1FE2D004D309B /* AlbumSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumSearchCell.swift; sourceTree = "<group>"; };
 		EE85E9A529C204D4004D309B /* ArtistSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistSearchCell.swift; sourceTree = "<group>"; };
 		EE85E9A729C20DBB004D309B /* SongViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongViewController.swift; sourceTree = "<group>"; };
@@ -98,6 +100,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		EE470FE829C87E3F00C5F4A6 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				EE470FE929C87E5200C5F4A6 /* UIImage.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		EEB4E59229C06A63007E3A62 = {
 			isa = PBXGroup;
 			children = (
@@ -119,6 +129,7 @@
 		EEB4E59D29C06A63007E3A62 /* iTunes_Search_Application_UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				EE470FE829C87E3F00C5F4A6 /* Extension */,
 				EEB4E5DE29C19596007E3A62 /* Model */,
 				EEB4E5D929C16F9E007E3A62 /* ViewModel */,
 				EEB4E5B229C0C1BD007E3A62 /* ViewController */,
@@ -305,6 +316,7 @@
 				EE470FE729C84DDD00C5F4A6 /* AlbumListCell.swift in Sources */,
 				EEB4E5EB29C1BBA0007E3A62 /* SongSearchCell.swift in Sources */,
 				EEB4E5E429C195F9007E3A62 /* Artist.swift in Sources */,
+				EE470FEA29C87E5200C5F4A6 /* UIImage.swift in Sources */,
 				EE470FE129C814F900C5F4A6 /* SongListCell.swift in Sources */,
 				EEB4E59F29C06A63007E3A62 /* AppDelegate.swift in Sources */,
 				EE85E9AB29C231C6004D309B /* PictureViewModel.swift in Sources */,
