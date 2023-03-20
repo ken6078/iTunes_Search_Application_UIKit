@@ -10,6 +10,7 @@ import UIKit
 class ArtistSearchCell: UITableViewCell {
     lazy var artistNameTitle: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 3
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -17,6 +18,14 @@ class ArtistSearchCell: UITableViewCell {
     func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
         URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }
+    
+    
+    lazy var rightArrowUIImageView: UIImageView = {
+        let image = UIImage(systemName: "chevron.right")!.imageWithColor(newColor: UIColor.systemGray4)
+        let songImageView = UIImageView(image: image)
+        songImageView.translatesAutoresizingMaskIntoConstraints = false
+        return songImageView
+    }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -33,8 +42,6 @@ class ArtistSearchCell: UITableViewCell {
         var image = UIImage(systemName: "music.mic.circle")
         let artistImageView = UIImageView(image: image)
         artistImageView.backgroundColor = .white
-//        artistImageView.layer.masksToBounds = true
-//        artistImageView.layer.cornerRadius = 30
         PictureViewModel.getDataFromHTML(url: url, pictureHtmlIndex: 16) { data in
             image = UIImage(data: data)
             PictureViewModel.cropImage(uiImage: image!, magnification: 2) { newImage in
@@ -55,8 +62,14 @@ class ArtistSearchCell: UITableViewCell {
         artistNameTitle.text = artist.artistName
         contentView.addSubview(artistNameTitle)
         artistNameTitle.leadingAnchor.constraint(equalTo: artistImageView.trailingAnchor, constant: 10).isActive = true
-        artistNameTitle.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -50).isActive = true
+        artistNameTitle.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -28).isActive = true
         artistNameTitle.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        
+        contentView.addSubview(rightArrowUIImageView)
+        rightArrowUIImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12).isActive = true
+        rightArrowUIImageView.widthAnchor.constraint(equalToConstant: 8).isActive = true
+        rightArrowUIImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        rightArrowUIImageView.heightAnchor.constraint(equalToConstant: 12).isActive = true
     }
 
 }

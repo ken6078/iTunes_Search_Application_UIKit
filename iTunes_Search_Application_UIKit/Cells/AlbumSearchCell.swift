@@ -11,6 +11,7 @@ class AlbumSearchCell: UITableViewCell {
     
     lazy var collectionNameTitle: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 2
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -19,6 +20,13 @@ class AlbumSearchCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
+    }()
+    
+    lazy var rightArrowUIImageView: UIImageView = {
+        let image = UIImage(systemName: "chevron.right")!.imageWithColor(newColor: UIColor.systemGray4)
+        let songImageView = UIImageView(image: image)
+        songImageView.translatesAutoresizingMaskIntoConstraints = false
+        return songImageView
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -57,15 +65,21 @@ class AlbumSearchCell: UITableViewCell {
         collectionNameTitle.text = album.collectionName
         contentView.addSubview(collectionNameTitle)
         collectionNameTitle.leadingAnchor.constraint(equalTo: songImageView.trailingAnchor, constant: 10).isActive = true
-        collectionNameTitle.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -50).isActive = true
+        collectionNameTitle.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -28).isActive = true
         collectionNameTitle.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -12).isActive = true
         
         artistNameTitle.text = album.artistName
         contentView.addSubview(artistNameTitle)
         artistNameTitle.leadingAnchor.constraint(equalTo: songImageView.trailingAnchor, constant: 10).isActive = true
         artistNameTitle.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -28).isActive = true
-        artistNameTitle.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 12).isActive = true
+        artistNameTitle.topAnchor.constraint(equalTo: collectionNameTitle.bottomAnchor, constant: 2).isActive = true
         artistNameTitle.textColor = .gray
+        
+        contentView.addSubview(rightArrowUIImageView)
+        rightArrowUIImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12).isActive = true
+        rightArrowUIImageView.widthAnchor.constraint(equalToConstant: 8).isActive = true
+        rightArrowUIImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        rightArrowUIImageView.heightAnchor.constraint(equalToConstant: 12).isActive = true
     }
 
 }
