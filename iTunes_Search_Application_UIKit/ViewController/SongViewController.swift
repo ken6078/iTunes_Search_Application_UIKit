@@ -212,6 +212,9 @@ class SongViewController: UIViewController {
     
     @objc func artistButtonAction() {
         print("TapArtist")
+        let navigationController = navigationController
+        let newViewController = ArtistViewController(artistId: song.artistID)
+        navigationController!.pushViewController(newViewController, animated: true)
     }
     
     @objc func webPageButtonAction() {

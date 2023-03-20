@@ -42,8 +42,6 @@ class ArtistSearchCell: UITableViewCell {
                     artistImageView.image = newImage
                     artistImageView.layer.masksToBounds = true
                     artistImageView.layer.cornerRadius = 30
-                    artistImageView.widthAnchor.constraint(equalToConstant: 59).isActive = true
-                    artistImageView.heightAnchor.constraint(equalToConstant: 59).isActive = true
                 }
             }
         }

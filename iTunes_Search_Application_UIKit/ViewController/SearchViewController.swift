@@ -121,7 +121,8 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
             let newViewController = AlbumViewController(albumId: albumListViewModel.albums[indexPath.row].id)
             navigationController!.pushViewController(newViewController, animated: true)
         case .artist:
-            break
+            let newViewController = ArtistViewController(artistId: artistListViewModel.artists[indexPath.row].id)
+            navigationController!.pushViewController(newViewController, animated: true)
         }
     }
     

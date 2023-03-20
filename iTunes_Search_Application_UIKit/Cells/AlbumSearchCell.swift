@@ -63,7 +63,7 @@ class AlbumSearchCell: UITableViewCell {
         artistNameTitle.text = album.artistName
         contentView.addSubview(artistNameTitle)
         artistNameTitle.leadingAnchor.constraint(equalTo: songImageView.trailingAnchor, constant: 10).isActive = true
-        artistNameTitle.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -50).isActive = true
+        artistNameTitle.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -28).isActive = true
         artistNameTitle.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 12).isActive = true
         artistNameTitle.textColor = .gray
     }
