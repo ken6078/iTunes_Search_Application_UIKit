@@ -162,21 +162,21 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch (style) {
         case .song:
-            if (songListViewModel.songs.count == 0 && searchText != "") {
+            if (songListViewModel.songs.count == 0 && searchText != "" && songListViewModel.state == .empty) {
                 showeEmptyResultView()
             } else {
                 emptyResultView.removeFromSuperview()
             }
             return songListViewModel.songs.count
         case .album:
-            if (albumListViewModel.albums.count == 0 && searchText != "") {
+            if (albumListViewModel.albums.count == 0 && searchText != "" && songListViewModel.state == .empty) {
                 showeEmptyResultView()
             } else {
                 emptyResultView.removeFromSuperview()
             }
             return albumListViewModel.albums.count
         case .artist:
-            if (artistListViewModel.artists.count == 0 && searchText != "") {
+            if (artistListViewModel.artists.count == 0 && searchText != "" && songListViewModel.state == .empty) {
                 showeEmptyResultView()
             } else {
                 emptyResultView.removeFromSuperview()
