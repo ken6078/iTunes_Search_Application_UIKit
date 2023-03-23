@@ -36,13 +36,14 @@ class AlbumSearchCell: UITableViewCell {
         let image = UIImage(systemName: "music.mic.circle")
         let songImageView = UIImageView(image: image)
         songImageView.layer.masksToBounds = true
-        songImageView.layer.cornerRadius = 10
+        songImageView.backgroundColor = .white
         PictureViewModel.getData(from: url) { data, response, error in
             if let error = error {
                 print("URLSession error: \(error)")
             } else {
                 DispatchQueue.main.async {
                     songImageView.image = UIImage(data: data!)
+                    songImageView.layer.cornerRadius = 10
                 }
             }
         }
