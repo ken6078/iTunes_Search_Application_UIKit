@@ -36,7 +36,6 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         let styleList = ["歌曲","專輯","歌手"]
         var picker = UISegmentedControl(items: styleList)
         picker.selectedSegmentIndex = 0
-        picker.addTarget(self, action: #selector(segmentSelected(sender:)), for: .valueChanged)
         return picker
     }()
 
@@ -53,6 +52,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         searchController.searchBar.searchTextField.clearButtonMode = .never
         navigationItem.hidesSearchBarWhenScrolling = false
         
+        stylePicker.addTarget(self, action: #selector(segmentSelected(sender:)), for: .valueChanged)
         view.addSubview(stylePicker)
         stylePicker.translatesAutoresizingMaskIntoConstraints = false
         stylePicker.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
@@ -149,21 +149,9 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     
     func didPresentSearchController(_ searchController: UISearchController) {
         selectedSegmentIndex = stylePicker.selectedSegmentIndex
-        if (selectedSegmentIndex != 0) {
-            self.stylePicker.setEnabled(false, forSegmentAt: 0)
-        }
-        if (selectedSegmentIndex != 1){
-            self.stylePicker.setEnabled(false, forSegmentAt: 1)
-        }
-        if (selectedSegmentIndex != 2){
-            self.stylePicker.setEnabled(false, forSegmentAt: 2)
-        }
     }
     
     func willDismissSearchController(_ searchController: UISearchController) {
-        self.stylePicker.setEnabled(true, forSegmentAt: 0)
-        self.stylePicker.setEnabled(true, forSegmentAt: 1)
-        self.stylePicker.setEnabled(true, forSegmentAt: 2)
         songListViewModel.songs = []
         albumListViewModel.albums = []
         artistListViewModel.artists = []
@@ -175,33 +163,31 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     func updateSearchResults(for searchController: UISearchController) {
         searchText = searchController.searchBar.text ?? ""
         print("searchText: ",searchText)
-        switch (style) {
-        case .song:
-            songListViewModel.state = .good
-            songListViewModel.songs = []
-            songListViewModel.page = 0
-            songListViewModel.getSongList(for: searchText) { [weak self] in
-                DispatchQueue.main.async {
-                    self?.searchTableView.reloadData()
-                }
+        
+        songListViewModel.state = .good
+        songListViewModel.songs = []
+        songListViewModel.page = 0
+        songListViewModel.getSongList(for: searchText) { [weak self] in
+            DispatchQueue.main.async {
+                self?.searchTableView.reloadData()
             }
-        case .album:
-            albumListViewModel.state = .good
-            albumListViewModel.albums = []
-            albumListViewModel.page = 0
-            albumListViewModel.getAlbumList(for: searchText) { [weak self] in
-                DispatchQueue.main.async {
-                    self?.searchTableView.reloadData()
-                }
+        }
+        
+        albumListViewModel.state = .good
+        albumListViewModel.albums = []
+        albumListViewModel.page = 0
+        albumListViewModel.getAlbumList(for: searchText) { [weak self] in
+            DispatchQueue.main.async {
+                self?.searchTableView.reloadData()
             }
-        case .artist:
-            artistListViewModel.state = .good
-            artistListViewModel.artists = []
-            artistListViewModel.page = 0
-            artistListViewModel.getArtistList(for: searchText) { [weak self] in
-                DispatchQueue.main.async {
-                    self?.searchTableView.reloadData()
-                }
+        }
+        
+        artistListViewModel.state = .good
+        artistListViewModel.artists = []
+        artistListViewModel.page = 0
+        artistListViewModel.getArtistList(for: searchText) { [weak self] in
+            DispatchQueue.main.async {
+                self?.searchTableView.reloadData()
             }
         }
     }

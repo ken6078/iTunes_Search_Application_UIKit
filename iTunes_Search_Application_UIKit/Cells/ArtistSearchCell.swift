@@ -30,6 +30,8 @@ class ArtistSearchCell: UITableViewCell {
         
         let url = URL(string: artist.artistLinkURL)!
         var image = UIImage(systemName: "music.mic.circle")
+        image = image!.resized(toWidth: 60.0, isOpaque: false)
+        
         let artistImageView = UIImageView(image: image)
         artistImageView.backgroundColor = .white
         PictureViewModel.getDataFromHTML(url: url, pictureHtmlIndex: 16) { data in
@@ -44,7 +46,6 @@ class ArtistSearchCell: UITableViewCell {
         }
         contentView.addSubview(artistImageView)
         artistImageView.translatesAutoresizingMaskIntoConstraints = false
-        artistImageView.translatesAutoresizingMaskIntoConstraints = false
         artistImageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
         artistImageView.heightAnchor.constraint(equalToConstant: 60).isActive = true
         artistImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
@@ -52,6 +53,7 @@ class ArtistSearchCell: UITableViewCell {
         
         artistNameLabel.text = artist.artistName
         contentView.addSubview(artistNameLabel)
+        artistNameLabel.translatesAutoresizingMaskIntoConstraints = false
         artistNameLabel.leadingAnchor.constraint(equalTo: artistImageView.trailingAnchor, constant: 10).isActive = true
         artistNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -28).isActive = true
         artistNameLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
