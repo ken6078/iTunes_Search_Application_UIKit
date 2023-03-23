@@ -38,6 +38,16 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         picker.selectedSegmentIndex = 0
         return picker
     }()
+    
+    lazy var errorMessageLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.textColor = .red
+        label.textAlignment = .center
+        label.text = "錯誤！\n"
+        label.numberOfLines = 5
+        return label
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -167,8 +177,19 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         songListViewModel.state = .good
         songListViewModel.songs = []
         songListViewModel.page = 0
-        songListViewModel.getSongList(for: searchText) { [weak self] in
-            DispatchQueue.main.async {
+        songListViewModel.getSongList(for: searchText) {
+            DispatchQueue.main.async { [weak self] in
+                switch (self?.songListViewModel.state) {
+                case .error(let message):
+                    self?.errorMessageLabel.text = "錯誤！\n" + message
+                    self?.view.addSubview(self!.errorMessageLabel)
+                    self?.errorMessageLabel.translatesAutoresizingMaskIntoConstraints = false
+                    self?.errorMessageLabel.centerYAnchor.constraint(equalTo: (self?.searchTableView.centerYAnchor)!).isActive = true
+                    self?.errorMessageLabel.centerXAnchor.constraint(equalTo: (self?.searchTableView.centerXAnchor)!).isActive = true
+                    self?.errorMessageLabel.widthAnchor.constraint(equalTo: (self?.searchTableView.widthAnchor)!).isActive = true
+                default:
+                    self?.errorMessageLabel.removeFromSuperview()
+                }
                 self?.searchTableView.reloadData()
             }
         }
@@ -178,6 +199,17 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         albumListViewModel.page = 0
         albumListViewModel.getAlbumList(for: searchText) { [weak self] in
             DispatchQueue.main.async {
+                switch (self?.albumListViewModel.state) {
+                case .error(let message):
+                    self?.errorMessageLabel.text = "錯誤！\n" + message
+                    self?.view.addSubview(self!.errorMessageLabel)
+                    self?.errorMessageLabel.translatesAutoresizingMaskIntoConstraints = false
+                    self?.errorMessageLabel.centerYAnchor.constraint(equalTo: (self?.searchTableView.centerYAnchor)!).isActive = true
+                    self?.errorMessageLabel.centerXAnchor.constraint(equalTo: (self?.searchTableView.centerXAnchor)!).isActive = true
+                    self?.errorMessageLabel.widthAnchor.constraint(equalTo: (self?.searchTableView.widthAnchor)!).isActive = true
+                default:
+                    self?.errorMessageLabel.removeFromSuperview()
+                }
                 self?.searchTableView.reloadData()
             }
         }
@@ -186,7 +218,19 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         artistListViewModel.artists = []
         artistListViewModel.page = 0
         artistListViewModel.getArtistList(for: searchText) { [weak self] in
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [weak self] in
+                switch (self?.artistListViewModel.state) {
+                case .error(let message):
+                    self?.errorMessageLabel.text = "錯誤！\n" + message
+                    self?.view.addSubview(self!.errorMessageLabel)
+                    self?.errorMessageLabel.translatesAutoresizingMaskIntoConstraints = false
+                    self?.errorMessageLabel.centerYAnchor.constraint(equalTo: (self?.searchTableView.centerYAnchor)!).isActive = true
+                    self?.errorMessageLabel.centerXAnchor.constraint(equalTo: (self?.searchTableView.centerXAnchor)!).isActive = true
+                    self?.errorMessageLabel.widthAnchor.constraint(equalTo: (self?.searchTableView.widthAnchor)!).isActive = true
+                default:
+                    self?.errorMessageLabel.removeFromSuperview()
+                }
+
                 self?.searchTableView.reloadData()
             }
         }
