@@ -162,6 +162,7 @@ class ArtistViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.reloadData()
         let navigationController = navigationController
         let newViewController = AlbumViewController(albumId: artistDetailViewModel.albumList[indexPath.row].id)
         navigationController!.pushViewController(newViewController, animated: true)
@@ -173,7 +174,7 @@ class ArtistViewController: UIViewController, UITableViewDataSource, UITableView
         present(vc, animated: true, completion: nil)
     }
     
-    @IBAction func shareButtonAction(_ sender: UIButton) {
+    @objc func shareButtonAction(_ sender: UIButton) {
             
         // text to share
         let text = self.artistDetailViewModel.artist!.artistLinkURL

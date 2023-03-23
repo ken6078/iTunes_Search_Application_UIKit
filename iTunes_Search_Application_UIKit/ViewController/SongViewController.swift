@@ -192,12 +192,18 @@ class SongViewController: UIViewController {
     }
     
     @objc func albumButtonAction() {
+        if (playingSong) {
+            playTapped()
+        }
         let navigationController = navigationController
         let newViewController = AlbumViewController(albumId: song.collectionId)
         navigationController!.pushViewController(newViewController, animated: true)
     }
     
     @objc func artistButtonAction() {
+        if (playingSong) {
+            playTapped()
+        }
         let navigationController = navigationController
         let newViewController = ArtistViewController(artistId: song.artistID)
         navigationController!.pushViewController(newViewController, animated: true)
@@ -209,7 +215,7 @@ class SongViewController: UIViewController {
         present(vc, animated: true, completion: nil)
     }
     
-    @IBAction func shareButtonAction(_ sender: UIButton) {
+    @objc func shareButtonAction(_ sender: UIButton) {
         // text to share
         let text = self.song.collectionViewURL
         // set up activity view controller

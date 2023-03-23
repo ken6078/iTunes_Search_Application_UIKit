@@ -169,14 +169,14 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
             }
             return songListViewModel.songs.count
         case .album:
-            if (albumListViewModel.albums.count == 0 && searchText != "" && songListViewModel.state == .loadedAll) {
+            if (albumListViewModel.albums.count == 0 && searchText != "" && albumListViewModel.state == .loadedAll) {
                 showeEmptyResultView()
             } else {
                 emptyResultView.removeFromSuperview()
             }
             return albumListViewModel.albums.count
         case .artist:
-            if (artistListViewModel.artists.count == 0 && searchText != "" && songListViewModel.state == .loadedAll) {
+            if (artistListViewModel.artists.count == 0 && searchText != "" && artistListViewModel.state == .loadedAll) {
                 showeEmptyResultView()
             } else {
                 emptyResultView.removeFromSuperview()
@@ -213,6 +213,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let navigationController = navigationController
+        tableView.reloadData()
         switch(style) {
         case .song:
             let newViewController = SongViewController(song: songListViewModel.songs[indexPath.row])

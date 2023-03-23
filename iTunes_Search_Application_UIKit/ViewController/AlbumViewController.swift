@@ -175,6 +175,7 @@ class AlbumViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.reloadData()
         let navigationController = navigationController
         let newViewController = SongViewController(song: albumDetailViewModel.songList[indexPath.row])
         navigationController!.pushViewController(newViewController, animated: true)
@@ -186,7 +187,7 @@ class AlbumViewController: UIViewController, UITableViewDataSource, UITableViewD
         present(vc, animated: true, completion: nil)
     }
     
-    @IBAction func shareButtonAction(_ sender: UIButton) {
+    @objc func shareButtonAction(_ sender: UIButton) {
             
         // text to share
         let text = self.albumDetailViewModel.album!.collectionViewURL!
