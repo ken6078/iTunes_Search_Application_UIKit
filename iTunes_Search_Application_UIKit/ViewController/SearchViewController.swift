@@ -48,6 +48,55 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         label.numberOfLines = 5
         return label
     }()
+    
+    lazy var recommendView: UIView = {
+        let recommendView = UIView()
+        let titleLabel = UILabel()
+        titleLabel.textColor = .lightGray
+        titleLabel.text = "你可以嘗試搜尋"
+        titleLabel.font = UIFont.systemFont(ofSize: 28)
+        recommendView.addSubview(titleLabel)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.centerYAnchor.constraint(equalTo: recommendView.centerYAnchor).isActive = true
+        titleLabel.centerXAnchor.constraint(equalTo: recommendView.centerXAnchor).isActive = true
+        
+        let nameList = ["五月天", "周杰倫", "周興哲", "烏梅子醬", "稻香", "Dcard"]
+        var y_axis = 0
+        for name in nameList {
+            let button = recommendButton(buttonTitle: name)
+            recommendView.addSubview(button)
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: CGFloat(y_axis)).isActive = true
+            button.centerXAnchor.constraint(equalTo: recommendView.centerXAnchor).isActive = true
+            y_axis += 30
+        }
+        
+        
+        return recommendView
+    }()
+    
+    func recommendButton(buttonTitle: String) -> UIButton {
+        let button = UIButton()
+        button.setTitle(buttonTitle, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        button.frame = CGRect(x: 100, y: 100, width: 140, height: 70)
+        return button
+    }
+    
+    @objc func buttonAction(_ sender: UIButton) {
+        searchController.searchBar.text = sender.titleLabel?.text
+    }
+    
+    func showRecommendView() {
+        view.addSubview(recommendView)
+        recommendView.translatesAutoresizingMaskIntoConstraints = false
+        recommendView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        recommendView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50).isActive = true
+        recommendView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        recommendView.heightAnchor.constraint(equalTo: searchTableView.heightAnchor).isActive = true
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +108,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         navigationItem.searchController = searchController
         searchController.searchResultsUpdater = self
         searchController.delegate = self
-        searchController.searchBar.searchTextField.clearButtonMode = .never
+//        searchController.searchBar.searchTextField.clearButtonMode = .never
         navigationItem.hidesSearchBarWhenScrolling = false
         
         stylePicker.addTarget(self, action: #selector(segmentSelected(sender:)), for: .valueChanged)
@@ -81,6 +130,8 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         searchTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         searchTableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor).isActive = true
         searchTableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor).isActive = true
+        
+        showRecommendView()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -165,15 +216,17 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         songListViewModel.songs = []
         albumListViewModel.albums = []
         artistListViewModel.artists = []
-        do {
-            searchTableView.reloadData()
-        }
+        searchTableView.reloadData()
     }
     
     func updateSearchResults(for searchController: UISearchController) {
         searchText = searchController.searchBar.text ?? ""
+        if (searchText == "") {
+            showRecommendView()
+        } else {
+            recommendView.removeFromSuperview()
+        }
         print("searchText: ",searchText)
-        
         songListViewModel.state = .good
         songListViewModel.songs = []
         songListViewModel.page = 0
