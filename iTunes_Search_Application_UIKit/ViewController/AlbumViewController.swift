@@ -18,13 +18,23 @@ class AlbumViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     init(albumId: Int) {
         self.albumDetailViewModel = AlbumDetailViewModel(albumId: albumId)
-        self.errorMessage = ""
+        self.errorMessage = "ABC123"
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    lazy var errorMessageLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.textColor = .red
+        label.textAlignment = .center
+        label.text = "錯誤！\n"
+        label.numberOfLines = 5
+        return label
+    }()
     
     lazy var loadingView: UIView = {
         let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
@@ -84,10 +94,15 @@ class AlbumViewController: UIViewController, UITableViewDataSource, UITableViewD
         self.albumDetailViewModel.loadData {
             DispatchQueue.main.async {
                 self.loadingView.removeFromSuperview()
-
                 if (self.albumDetailViewModel.album?.collectionName == nil) {
                     print("ERROR")
-                    self.view.backgroundColor = .red
+                    self.errorMessage = self.albumDetailViewModel.errorMessage!
+                    self.errorMessageLabel.text = "錯誤！\n" + self.errorMessage
+                    self.view.addSubview(self.errorMessageLabel)
+                    self.errorMessageLabel.translatesAutoresizingMaskIntoConstraints = false
+                    self.errorMessageLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
+                    self.errorMessageLabel.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -30).isActive = true
+                    self.errorMessageLabel.centerYAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerYAnchor).isActive = true
                     return
                 }
                 

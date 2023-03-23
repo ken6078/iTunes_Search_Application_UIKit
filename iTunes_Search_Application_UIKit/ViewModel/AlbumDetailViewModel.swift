@@ -17,6 +17,7 @@ class AlbumDetailViewModel: ObservableObject {
     @Published var album: Album?
     @Published var songList: [Song] = [Song]()
     @Published var state: State
+    @Published var errorMessage: String?
     
     init (albumId: Int) {
         self.albumId = albumId
@@ -33,6 +34,7 @@ class AlbumDetailViewModel: ObservableObject {
             if let error = error {
                 print("URLSession error: \(error)")
                 self?.state = .error("Could not load: \(error.localizedDescription)")
+                self?.errorMessage = "Could not load: \(error.localizedDescription)"
             } else if let data = data {
                 do {
                     let result = try JSONDecoder().decode(AlbumSongLookupResult.self, from: data)
@@ -49,6 +51,7 @@ class AlbumDetailViewModel: ObservableObject {
                 } catch {
                     print("AlbumSongLookupResult Json Decode error: \(error)")
                     self?.state = .error("Json Decode error: \(error.localizedDescription)")
+                    self?.errorMessage = "Json Decode error: \(error.localizedDescription)"
                 }
             }
             completion()

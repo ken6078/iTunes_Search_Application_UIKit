@@ -26,6 +26,16 @@ class ArtistViewController: UIViewController, UITableViewDataSource, UITableView
         fatalError("init(coder:) has not been implemented")
     }
     
+    lazy var errorMessageLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.textColor = .red
+        label.textAlignment = .center
+        label.text = "錯誤！\n"
+        label.numberOfLines = 5
+        return label
+    }()
+    
     lazy var loadingView: UIView = {
         let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
         let spinner = UIActivityIndicatorView()
@@ -80,7 +90,13 @@ class ArtistViewController: UIViewController, UITableViewDataSource, UITableView
 
                 if (self.artistDetailViewModel.artist?.artistName == nil) {
                     print("ERROR")
-                    self.view.backgroundColor = .red
+                    self.errorMessage = self.artistDetailViewModel.errorMessage!
+                    self.errorMessageLabel.text = "錯誤！\n" + self.errorMessage
+                    self.view.addSubview(self.errorMessageLabel)
+                    self.errorMessageLabel.translatesAutoresizingMaskIntoConstraints = false
+                    self.errorMessageLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
+                    self.errorMessageLabel.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -30).isActive = true
+                    self.errorMessageLabel.centerYAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerYAnchor).isActive = true
                     return
                 }
                 
