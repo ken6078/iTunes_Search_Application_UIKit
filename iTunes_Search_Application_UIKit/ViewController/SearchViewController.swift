@@ -53,14 +53,14 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         let recommendView = UIView()
         let titleLabel = UILabel()
         titleLabel.textColor = .lightGray
-        titleLabel.text = "你可以嘗試搜尋"
+        titleLabel.text = "您也可以嘗試搜尋"
         titleLabel.font = UIFont.systemFont(ofSize: 28)
         recommendView.addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.centerYAnchor.constraint(equalTo: recommendView.centerYAnchor).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: recommendView.topAnchor, constant: 90).isActive = true
         titleLabel.centerXAnchor.constraint(equalTo: recommendView.centerXAnchor).isActive = true
         
-        let nameList = ["五月天", "周杰倫", "周興哲", "烏梅子醬", "稻香", "Dcard"]
+        let nameList = ["五月天", "周杰倫", "A-Lin同名專輯", "新的心跳", "烏梅子醬", "稻香", "Dcard"]
         var y_axis = 0
         for name in nameList {
             let button = recommendButton(buttonTitle: name)
@@ -70,8 +70,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
             button.centerXAnchor.constraint(equalTo: recommendView.centerXAnchor).isActive = true
             y_axis += 30
         }
-        
-        
+
         return recommendView
     }()
     
@@ -92,10 +91,36 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     func showRecommendView() {
         view.addSubview(recommendView)
         recommendView.translatesAutoresizingMaskIntoConstraints = false
-        recommendView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        recommendView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50).isActive = true
-        recommendView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-        recommendView.heightAnchor.constraint(equalTo: searchTableView.heightAnchor).isActive = true
+        recommendView.topAnchor.constraint(equalTo: searchTableView.topAnchor).isActive = true
+        recommendView.bottomAnchor.constraint(equalTo: searchTableView.bottomAnchor).isActive = true
+        recommendView.centerXAnchor.constraint(equalTo: searchTableView.centerXAnchor).isActive = true
+        recommendView.widthAnchor.constraint(equalTo: searchTableView.widthAnchor).isActive = true
+    }
+    
+    lazy var emptyResultView: UIView = {
+        let emptyResultView = UIView()
+        let label = UILabel()
+        label.textColor = .lightGray
+        label.numberOfLines = 3
+        label.textAlignment = .center
+        label.text = "OPPS!\n找遍了東南西北\n也找不到您想要的東西"
+        label.font = UIFont.systemFont(ofSize: 26)
+        
+        emptyResultView.addSubview(label)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.topAnchor.constraint(equalTo: emptyResultView.topAnchor, constant: 30).isActive = true
+        label.centerXAnchor.constraint(equalTo: emptyResultView.centerXAnchor).isActive = true
+        
+        return emptyResultView
+    }()
+    
+    func showeEmptyResultView() {
+        view.addSubview(emptyResultView)
+        emptyResultView.translatesAutoresizingMaskIntoConstraints = false
+        emptyResultView.topAnchor.constraint(equalTo: searchTableView.topAnchor).isActive = true
+        emptyResultView.bottomAnchor.constraint(equalTo: searchTableView.bottomAnchor).isActive = true
+        emptyResultView.centerXAnchor.constraint(equalTo: searchTableView.centerXAnchor).isActive = true
+        emptyResultView.widthAnchor.constraint(equalTo: searchTableView.widthAnchor).isActive = true
     }
 
     override func viewDidLoad() {
@@ -137,10 +162,25 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch (style) {
         case .song:
+            if (songListViewModel.songs.count == 0 && searchText != "") {
+                showeEmptyResultView()
+            } else {
+                emptyResultView.removeFromSuperview()
+            }
             return songListViewModel.songs.count
         case .album:
+            if (albumListViewModel.albums.count == 0 && searchText != "") {
+                showeEmptyResultView()
+            } else {
+                emptyResultView.removeFromSuperview()
+            }
             return albumListViewModel.albums.count
         case .artist:
+            if (artistListViewModel.artists.count == 0 && searchText != "") {
+                showeEmptyResultView()
+            } else {
+                emptyResultView.removeFromSuperview()
+            }
             return artistListViewModel.artists.count
         }
     }
