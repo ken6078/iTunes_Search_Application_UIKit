@@ -103,7 +103,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         label.textColor = .lightGray
         label.numberOfLines = 3
         label.textAlignment = .center
-        label.text = "OPPS!\n找遍了東南西北\n也找不到您想要的東西"
+        label.text = "OOPS!\n找遍了東南西北\n也找不到您想要的東西"
         label.font = UIFont.systemFont(ofSize: 26)
         
         emptyResultView.addSubview(label)
