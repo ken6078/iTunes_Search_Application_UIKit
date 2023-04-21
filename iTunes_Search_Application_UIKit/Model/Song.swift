@@ -110,7 +110,7 @@ struct Song: Codable, Identifiable {
         self.artworkUrl100 = albumSongLookup.artworkUrl100
         self.collectionPrice = albumSongLookup.collectionPrice
         self.trackPrice = albumSongLookup.trackPrice
-        self.releaseDate = albumSongLookup.releaseDate
+        self.releaseDate = albumSongLookup.releaseDate ?? "Release date don't know"
         self.collectionExplicitness = albumSongLookup.collectionExplicitness
         self.trackExplicitness = albumSongLookup.trackExplicitness!
         self.discCount = albumSongLookup.discCount

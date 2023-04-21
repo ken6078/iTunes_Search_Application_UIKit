@@ -54,7 +54,7 @@ struct Album: Codable, Identifiable {
         self.artistName = artistAlbumLookUp.artistName!
         self.collectionName = artistAlbumLookUp.collectionName!
         self.collectionCensoredName = artistAlbumLookUp.collectionCensoredName!
-        self.artistViewURL = artistAlbumLookUp.artistViewURL!
+        self.artistViewURL = artistAlbumLookUp.artistViewURL
         self.collectionViewURL = artistAlbumLookUp.collectionViewURL!
         self.artworkUrl60 = artistAlbumLookUp.artworkUrl60!
         self.artworkUrl100 = artistAlbumLookUp.artworkUrl100!
@@ -87,7 +87,7 @@ struct Album: Codable, Identifiable {
         self.copyright = albumSongLookup.copyright
         self.country = albumSongLookup.country
         self.currency = albumSongLookup.currency
-        self.releaseDate = albumSongLookup.releaseDate
+        self.releaseDate = albumSongLookup.releaseDate ?? "Don't know"
         self.primaryGenreName = albumSongLookup.primaryGenreName
     }
 }

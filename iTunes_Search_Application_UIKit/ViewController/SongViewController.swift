@@ -151,7 +151,10 @@ class SongViewController: UIViewController {
         albumNameLabel.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         albumNameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
-        releaseDateLabel.text = String(song.releaseDate.prefix(10))
+        if (song.releaseDate != "Release date don't know") {
+            song.releaseDate = String(song.releaseDate.prefix(10))
+        }
+        releaseDateLabel.text = song.releaseDate
         view.addSubview(releaseDateLabel)
         releaseDateLabel.translatesAutoresizingMaskIntoConstraints = false
         releaseDateLabel.topAnchor.constraint(equalTo: albumNameLabel.centerYAnchor, constant: 14).isActive = true
